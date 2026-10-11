@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<title>Una carta para vos ♡</title>
+<style>
+:root {
+  --paper: #090909;
+  --cream: #f7e9e9;
+  --brown: #250609;
+  --wine: #b5122b;
+  --ink: #f7e9e9;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background: radial-gradient(circle at top, #202020, #090909 65%, #000);
+  font-family: Georgia, "Times New Roman", serif;
+}
+button { font: inherit; cursor: pointer; }
+.screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px 16px;
+}
+.intro { text-align: center; max-width: 520px; }
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font: 11px Arial, sans-serif;
+  color: #e7a0aa;
+}
+h1 {
+  font-size: clamp(2.2rem, 8vw, 4rem);
+  font-weight: normal;
+  margin: 14px 0;
+  line-height: 1.08;
+}
+.subtitle { line-height: 1.8; color: #e5d5d7; }
+.envelope-button {
+  border: 0;
+  background: none;
+  margin: 24px auto 10px;
+  display: block;
+}
+.envelope {
+  width: min(76vw, 300px);
+  aspect-ratio: 1.3;
+  position: relative;
+  filter: drop-shadow(0 14px 18px #b5122b33);
+  transition: transform .3s;
+}
+.envelope-button:hover .envelope {
+  transform: translateY(-5px) rotate(-1deg);
+}
+.env-back {
+  position: absolute;
+  inset: 0;
+  background: #5e0716;
+  border-radius: 5px;
+}
+.env-paper {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 8%;
+  height: 77%;
+  background: #b5122b;
+  color: #fff0f2;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+.env-flap {
+  position: absolute;
+  inset: 0;
+  background: #d5223e;
+  clip-path: polygon(0 0,100% 0,50% 60%);
+}
+.env-front {
+  position: absolute;
+  inset: 0;
+  background: #8e0d22;
+  clip-path: polygon(0 100%,0 0,50% 57%,100% 0,100% 100%);
+}
+.seal {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  transform: translate(-50%,-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--wine);
+  color: #fff0f2;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  box-shadow: 0 2px 7px #4b242c55;
+}
+.hint { font-size: .9rem; color: #c6aeb1; }
+.hidden { display: none !important; }
+.letter-wrap { width: min(100%, 720px); }
+.letter {
+  background: #a90f27;
+  color: #fff0f2;
+  padding: clamp(26px, 6vw, 64px);
+  border: 1px solid #d84a5e;
+  box-shadow: 0 18px 60px #b5122b35;
+  position: relative;
+}
+.letter:before {
+  content: "♡";
+  position: absolute;
+  right: 22px;
+  top: 14px;
+  font-size: 22px;
+  color: #ffd4da;
+}
+.page-number {
+  text-align: center;
+  font: 11px Arial, sans-serif;
+  letter-spacing: .25em;
+  color: #ffd4da;
+}
+.letter h2 {
+  font-weight: normal;
+  font-style: italic;
+  font-size: 2.1rem;
+  color: #fff0f2;
+  margin: 20px 0;
+}
+.letter-text {
+  white-space: pre-wrap;
+  line-height: 1.95;
+  font-size: 1.06rem;
+}
+.signature {
+  text-align: center;
+  margin-top: 30px;
+  font-style: italic;
+  color: #fff0f2;
+  line-height: 1.9;
+}
+.heart-divider {
+  text-align: center;
+  color: #ffd4da;
+  margin: 24px 0;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.pill {
+  border: 1px solid #9f2538;
+  background: #171010;
+  color: #fff0f2;
+  border-radius: 99px;
+  padding: 12px 20px;
+}
+.pill.primary {
+  background: var(--wine);
+  color: #fff5e8;
+  border-color: var(--wine);
+}
+.closing { text-align: center; padding: 36px 10px; }
+.closing .big-heart {
+  font-size: 3.5rem;
+  color: #e32442;
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  50% { transform: scale(1.12); }
+}
+.floating {
+  position: fixed;
+  bottom: -30px;
+  pointer-events: none;
+  animation: floatUp 5s linear forwards;
+  color: #ff405d;
+  opacity: .75;
+  z-index: 5;
+}
+@keyframes floatUp {
+  to { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+}
+footer {
+  text-align: center;
+  padding: 0 15px 25px;
+  font: 11px Arial, sans-serif;
+  color: #a99a9d;
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="screen" id="cover">
+    <div class="intro">
+      <div class="eyebrow">Un pequeño regalo para vos</div>
+      <h1>El amor de mi vida se volvió la musa de mis escritos más cursis.</h1>
+      <p class="subtitle">Y mereces leer una carta que sea solo para ti.</p>
+
+      <button class="envelope-button" id="openLetter" aria-label="Abrir la carta">
+        <div class="envelope">
+          <div class="env-back"></div>
+          <div class="env-paper">Para mi persona favorita ♡</div>
+          <div class="env-flap"></div>
+          <div class="env-front"></div>
+          <div class="seal">♥</div>
+        </div>
+      </button>
+      <div class="hint">Tocá el sobre para abrirlo</div>
+    </div>
+  </section>
+
+  <section class="screen hidden" id="letterScreen">
+    <div class="letter-wrap">
+      <article class="letter">
+        <div class="page-number">UNA CARTA PARA VOS</div>
+        <h2 id="greeting">Hola, mi amor.</h2>
+
+        <div class="letter-text" id="letterText">Tenía guardado el link y pensaba en armarte uno para tu cumple, pero como me compartiste uno parecido en Insta, pensé que no necesitaba esperar un día especial para mandártelo. ¿Sabés por qué? Porque cada día es especial contigo.
+
+Amor, qué lindo es saber que sos el único dueño de ese apodo. Llegaste un día de la nada a mi vida y nunca imaginé que esa charla sin segundas intenciones, ese 8 de septiembre, cambiaría mi vida. Llegaste cuando menos lo esperaba y cuando no esperaba a nadie; de hecho, no quería a nadie en mi vida.
+
+Si me hubieras visto en mi cumple, decía que no quería enamorarme de nadie y hoy, hoy me encuentro soñando con un día casarme y formar una familia con el hombre que amo. Ese niño tan lindo que llegó a mi vida y me enamoró por completo; ese hombre que me enamora cada día, el primero con el que quiero hablar ni bien me despierto y el último en quien pienso antes de dormir.
+
+Sinceramente, no sé qué hice para encontrarme contigo: un hombre muy lindo, trabajador, atento, detallista, romántico, intenso, divertido... El hombre de mis sueños en carne y hueso.
+Sabés, durante mucho tiempo creí que no iba a poder encontrar a un hombre así; creo que hasta me había dado por vencida, hasta ese día en que te conocí.
+
+Y sí, algo tenía que haber: 882 benditos kilómetros que nos separan cada día, pero mi amor por ti es tan grande que no me importa la distancia. Obvio que me encantaría tenerte a mi lado, llenarte de besos y abrazos todo el día, que te canses de escucharme decirte TE AMO mil veces al día... Pero así fue como Dios y el destino lo quisieron.</div>
+
+        <div class="heart-divider">— ♡ —</div>
+        <div class="signature" id="signature">Gracias, amor. Gracias por ser tú. Gracias por demostrarme que aún existe el amor. Gracias por ser tan atento. Gracias por enseñarme que puedo ser amada. Gracias por estar siempre presente.</div>
+      </article>
+
+      <div class="controls">
+        <button class="pill" id="backButton">← Volver al sobre</button>
+        <button class="pill primary" id="surpriseButton">Una última cosita ♡</button>
+      </div>
+
+      <div class="closing hidden" id="closing">
+        <div class="big-heart">♥</div>
+        <h2>Te amo mucho, mi amor hermoso.</h2>
+        <p>Nunca dudes de ello.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>Hecho con amor, especialmente para vos ♡</footer>
+
+<script>
+const cover = document.getElementById('cover');
+const letterScreen = document.getElementById('letterScreen');
+const closing = document.getElementById('closing');
+
+document.getElementById('openLetter').addEventListener('click', () => {
+  cover.classList.add('hidden');
+  letterScreen.classList.remove('hidden');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  for (let i = 0; i < 12; i++) setTimeout(makeHeart, i * 180);
+});
+
+document.getElementById('backButton').addEventListener('click', () => {
+  letterScreen.classList.add('hidden');
+  cover.classList.remove('hidden');
+  closing.classList.add('hidden');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+});
+
+document.getElementById('surpriseButton').addEventListener('click', () => {
+  closing.classList.toggle('hidden');
+  if (!closing.classList.contains('hidden')) {
+    closing.scrollIntoView({behavior: 'smooth', block: 'center'});
+    for (let i = 0; i < 18; i++) setTimeout(makeHeart, i * 140);
+  }
+});
+
+function makeHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'floating';
+  heart.textContent = Math.random() > .4 ? '♡' : '♥';
+  heart.style.left = (5 + Math.random() * 90) + 'vw';
+  heart.style.fontSize = (14 + Math.random() * 20) + 'px';
+  heart.style.animationDuration = (3.5 + Math.random() * 3) + 's';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 7000);
+}
+</script>
+</body>
+</html>
